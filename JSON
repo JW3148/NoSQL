@@ -1,0 +1,9 @@
+Json document
+
+key value pairs
+
+format
+{key1:value1,
+key2:value2}
+
+value can be another document
