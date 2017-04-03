@@ -1,0 +1,6 @@
+database
+collection
+document
+
+mongod --db server
+mongo  --shell, client application
