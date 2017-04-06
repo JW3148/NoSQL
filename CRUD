@@ -7,3 +7,12 @@ db.movies.find("year":1981).pretty()
 var c=db.movies.find()
 c.hasNext()
 c.next()
+
+
+db.names.findOne()
+db.names.find()
+
+var j=db.names.findOne()
+j
+j.name='jw'
+db.names.save(j)
