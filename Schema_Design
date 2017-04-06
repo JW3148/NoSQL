@@ -1,0 +1,11 @@
+embed or not?
+
+embed means to combine entities, 
+for example, a blog schema, the post entities will include auther, comments, tags
+
+it is good to embed in this case becasue
+- most time it is just access from post, i.e. you don't enter a blog for comments
+- a problem with embed is that, say if you change a tag, from bycle to cycling, you will
+  need to change multiple records. but this kind of update is rare. so you'll be fine.
+ 
+it is impossible to embed in case a document is > 16MB, which is maximum size for mongoDB document
