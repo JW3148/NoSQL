@@ -1,0 +1,2 @@
+mongorestore dump  --restore a directory 'dump' to mongo db
+db.hw1.find({},{question:0})
