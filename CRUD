@@ -16,3 +16,45 @@ var j=db.names.findOne()
 j
 j.name='jw'
 db.names.save(j)
+
+
+--------------------
+Create 
+  insertOne()
+  insertMany()
+    ordered --insert in an ordered way, error out once see error, the rest will not be inserted
+    non-ordered --will skip errorous record, the rest will be inserted
+  update commands("upserts")
+--------------------
+_id
+  if you don't suply one, it will creat one
+  12-Bytes hex string
+  ----|---|--|---   date|Mac address|ProcessID|Counter
+  index
+--------------------
+Reading Documents
+  Equality matches
+    Scalars fields: db.movieDetails.find({rated:"PG-13",year:2009}).count()
+    Embeded documents fields:db.movieDetails.find({"tomato.meter":100})
+    Arrays fields:db.movieDetails.find({"writters":["Ethan Coen","Joel Coen"]}),
+                  db.movieDetails.find({"actors":"Jeff Bridges"}),
+                  db.movieDetails.find({"actors.0":"Jeff Bridges"})
+                                 
+  Cursors
+    note Mongo Shell return result in batches
+    1st batch 1mb, 2nd and later 4mb
+    type "it" for more
+    
+  Projection --limiting fields
+    db.moviesDetails.find({rated:"PG"},{title:1, _id:0})
+   
+   Comparison Operators
+   
+   Element Operators
+    $exists:db.movieDetails.find({"tomato.meter":{$exist:true}})
+    $type:db.moviesScratch.find({"_id":{$type:"string"}).pretty
+   
+   Logical operators
+   Regex Operator
+   Array Operators
+      
