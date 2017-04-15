@@ -57,4 +57,18 @@ Reading Documents
    Logical operators
    Regex Operator
    Array Operators
-      
+   -------------------------------
+   Update
+    UpdateOne: 
+      db.movieDetails.updateOne({title:"the Martian"},{$set:{poster:"http://xyz"}})
+      db.movieDetails.updateOne({title:"the Martian"},{$inc:{"tomato.reviews":3,"tomato.userReviews":25}})
+      db.movieDetails.updateOne({title:"the Martian"},{$push:{reviews:{rating:4.5,reviewer:"James",text:"great"}}})
+      db.movieDetails.updateOne({title:"the Martian"},{$push:{reviews:{$each:[{rating:4.5,reviewer:"James"},{rating:5,reviewer:"Nikki"}]}}})
+      db.movieDetails.updateOne({title:"the Martian"},{$push:{reviews:{$each:[{rating:4.5,reviewer:"James"},{rating:5,reviewer:"Nikki"}],
+      $position:0,$slice:5}}})
+    UpdateMany
+      db.movieDetails.updateOne({rated:""},{$unset:{rated:""}}})
+    Upsert
+      db.movieDetails.updateOne({"imdb.id":detail.imdb.id},{$set:detail},{upsert:true})  --detail is a document
+    ReplaceOne
+      db.movieDetails.replaceOne({"imdb":detail.imdb.id},detail)  --to replace a document in a collection
