@@ -1,0 +1,23 @@
+--start mongod with WireTiger StorageEngine
+killall mongod
+mkdir WT
+mongod -dbpath WT -storageEngine wireTiger
+
+StoreEngine
+get data from persistent storage to virtual memory
+manage, allocate memory
+
+MMAPv1(DEFAULT)
+-based on mmap system call
+-Collection Level Concurency
+-allow inplace update
+-power of two size, 3->4,7->8,19->32
+
+
+
+Wired Tiger
+-Document Level Concurrency
+-Compression functionality - data and indexes
+-No in place update
+
+
