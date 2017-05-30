@@ -1,0 +1,38 @@
+CRUD
+  Create
+    -db.collection.insert()
+    -db.collection.save() --a document to be inserted if the _id is not included, or the _id doesn't match any documents.
+    -db.collection.update() 'upsert' option available
+    -db.collection.findAndModify()
+   
+    findAndModify VS.update
+    The difference is that FindAndModify() returns the document, either the pre-update or post-update version, 
+    together with the update, in one atomic operation. Update is atomic but does not return the document, 
+    so if you then query for it it's possible it will have been changed by another process in the interim.
+    When modifying a single document, both findAndModify() and the update() method atomically update the document.
+    Note that this is for a single document - update can modify multiple documents, findandmodify cannot.
+    Also, findandmodify() can remove a document, update() cannot. findandModify has sort option
+    
+    Bulk Insert
+    bulk insert by passing an array to db.collection.insert(). ordered and unordered bulk inserts
+    
+  Read
+    -db.collection.find() --a find() query will return a cursor:
+    -operators: $lt and $gt,string inequalities, $regex, $exists, $type, $or,$and 
+    -Array Operators: Querying Inside Arrays, $in and $all, Dot Notation
+    -cursor: cursor.count(), cursor.sort(), cursor.skip(), cursor.limit(), cursor.next()
+    -db.collection.count(), db.collection.distinct()  --will not return cursor
+    -Projection: db.bios.find( { }, { name: 1, contribs: 1 } )
+    
+    General syntax
+    --db.collection.find({"column":value})  --if the column is a array column, then this means 'contain'; if column is a document,
+      value should be a document
+    --db.collection.find({"column":{$operator1:value, $operator2:value,...}})
+    --$in: db.collection.find({"column":{$in:[x,y,z,...]}}) --note the value of key $in is an array
+    --column is an array of docs, $elemMatch
+    --Query Fields of an Embedded Document: dot notation, db.collection.find({"filedname.filedkey1":x})
+    --projection on field of array and filed of embeded col: dot notation, $slice
+    --db.bios.find().sort( { name: 1 } ).limit( 5 )
+    --$exists is not the same as exsits in SQL; In Mongo, it is used to identify if the column exist --usefull as mongo is schemaless
+      { field: { $exists: <boolean> } }
+    
