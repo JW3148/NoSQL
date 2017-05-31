@@ -35,4 +35,38 @@ CRUD
     --db.bios.find().sort( { name: 1 } ).limit( 5 )
     --$exists is not the same as exsits in SQL; In Mongo, it is used to identify if the column exist --usefull as mongo is schemaless
       { field: { $exists: <boolean> } }
+    --$or:db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } ) --note that the value for key$or is an array of docs
+    --$all: { tags: { $all: [ "ssl" , "security" ] } } --tags is an array fields and this query mean it contains both "ssl" and "security"
+   
+   Update
+    --db.collection.save()
+    --db.collection.findAndModify()
+    --db.collection.update()
+        --$set, $unset, $rename, $setOnInsert, $inc, $mul, $min and $max
+        --array operators: $addToSet, $pop, $pull, $pullAll, $push($each,$slice,$sort,$position),$addToSet,  $elemMatch
+    --Upserts
+    --Multi updates
     
+    General Syntax
+    --db.collection.update(<query>,<update>,{upsert: <boolean>,multi: <boolean>,writeConcern: <document>,collation: <document>})
+    --$unset to remove field: db.books.update( { _id: 1 }, { $unset: { tags: 1 } } )  --remove column tag
+    --Replace All Fields, in the update part, just specify a document
+    --To update multiple documents, set the multi option to true
+    --Upsert f the collection had no matching document, the operation would result in the insertion of a document using the fields from both the <query> and the <update> specifications
+    --$rename to rename a column: db.students.updateMany( {}, { $rename: { "nmae": "name" } } ) 
+    --$setOnInsert only set value for a field upon new insertion
+    --$addToSet: db.inventory.update({ _id: 1 },{ $addToSet: { tags: "accessories" } }, use $each to add multiple element
+    --$pop to remove first/last element of an array, db.students.update( { _id: 1 }, { $pop: { scores: -1 } } )  -1=remove first
+    --$push with $each,$sort,$slice, see below..   
+       db.students.update(
+       { _id: 5 },
+       {
+         $push: {
+           quizzes: {
+              $each: [ { wk: 5, score: 8 }, { wk: 6, score: 7 }, { wk: 7, score: 6 } ],
+              $sort: { score: -1 },
+              $slice: 3
+           }
+         }
+       }
+    )
