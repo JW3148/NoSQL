@@ -74,3 +74,19 @@ CRUD
    
    Delete
       -db.collection.remove()
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+INDEXES
+  
+  Type of indexes
+    -single field, compound, multikey
+    -special index: Geo index(2d and 2dsphere, Text Indexes, hashed index(only support equal match)
+    -unique index
+  Options for index
+    -TTL, Sparse, Unique
+  Covered Queries
+  .explain() Method
+  Index Strategy
+  Background Index Creation
+  Regex on String Fields and Indexes
+   
