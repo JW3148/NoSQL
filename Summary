@@ -1,6 +1,6 @@
 CRUD
   Create
-    -db.collection.insert()
+    -db.collection.insert()  --{ ordered: false } will ignore failed rows and insert the rest
     -db.collection.save() --a document to be inserted if the _id is not included, or the _id doesn't match any documents.
     -db.collection.update() 'upsert' option available
     -db.collection.findAndModify()
@@ -70,3 +70,7 @@ CRUD
          }
        }
     )
+    
+   
+   Delete
+      -db.collection.remove()
