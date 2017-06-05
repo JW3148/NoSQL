@@ -85,8 +85,21 @@ INDEXES
   Options for index
     -TTL, Sparse, Unique
   Covered Queries
-  .explain() Method
+  .explain() Method--db.collection.explain().cursor,  cursor.explain(), verbosity("queryPlanner", "executionStats", and "allPlansExecution")
   Index Strategy
-  Background Index Creation
+  Background Index Creation: db.people.createIndex( { zipcode: 1}, {background: true} )
   Regex on String Fields and Indexes
-   
+  Create Index: db.collection.createIndex( { orderDate: 1 } ), db.collection.createIndex( { orderDate: 1, zipcode: -1 } )
+
+  By default, creating an index blocks all other operations on a database. 
+  When building an index on a collection, the database that holds the collection is 
+  unavailable for read or write operations until the index build completes.
+  
+  db.collection.getIndexes()
+  Create a multi key index
+  { _id: 1, item: "ABC", ratings: [ 2, 5, 9 ] }, db.survey.createIndex( { ratings: 1 } )
+  
+  Sort and Non-prefix Subset of an Index
+  An index can support sort operations on a non-prefix subset of the index key pattern. 
+  To do so, the query must include equality conditions on all the prefix keys that precede the sort keys.
+  
