@@ -81,7 +81,7 @@ INDEXES
   Type of indexes
     -single field, compound, multikey
     -special index: Geo index(2d and 2dsphere, Text Indexes, hashed index(only support equal match)
-    -unique index
+    -unique index: db.members.createIndex( { "user_id": 1 }, { unique: true } )
   Options for index
     -TTL, Sparse, Unique
   Covered Queries
@@ -102,4 +102,6 @@ INDEXES
   Sort and Non-prefix Subset of an Index
   An index can support sort operations on a non-prefix subset of the index key pattern. 
   To do so, the query must include equality conditions on all the prefix keys that precede the sort keys.
+  
+  Partial Index
   
